@@ -10,7 +10,7 @@ import Chat from "./componenent/chat";
 import { io } from "socket.io-client";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from 'react';
-const socket = io('http://localhost:3000')
+const socket = io('http://referralworktesting-env.eba-esbeud5w.ap-south-1.elasticbeanstalk.com/')
 
 
 function App() {
@@ -35,7 +35,11 @@ function App() {
 
     //heartbeat messages
     const heartbeatCheck = () => {
-      socket.emit("heartbeat",'ping')
+      for (let i = 0; i < 200; i++) {
+        console.log('sendind beat')
+        socket.emit("heartbeat", 'ping')
+        console.log('heart sent')
+      }
     }
     setInterval(heartbeatCheck, 3000)
   return (
